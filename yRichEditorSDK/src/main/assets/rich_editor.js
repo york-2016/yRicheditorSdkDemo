@@ -13,7 +13,55 @@ document.addEventListener("selectionchange", function() { RE.backuprange(); });
 
 // Initializations
 RE.callback = function() {
-    window.location.href = "re-callback://" + encodeURI(RE.getHtml());
+
+
+           var items = [];
+           if (document.queryCommandState('bold')) {
+               items.push('bold');
+           }
+           if (document.queryCommandState('italic')) {
+               items.push('italic');
+           }
+           if (document.queryCommandState('subscript')) {
+               items.push('subscript');
+           }
+           if (document.queryCommandState('superscript')) {
+               items.push('superscript');
+           }
+           if (document.queryCommandState('strikeThrough')) {
+               items.push('strikeThrough');
+           }
+           if (document.queryCommandState('underline')) {
+               items.push('underline');
+           }
+           if (document.queryCommandState('insertOrderedList')) {
+               items.push('orderedList');
+           }
+           if (document.queryCommandState('insertUnorderedList')) {
+               items.push('unorderedList');
+           }
+           if (document.queryCommandState('justifyCenter')) {
+               items.push('justifyCenter');
+           }
+           if (document.queryCommandState('justifyFull')) {
+               items.push('justifyFull');
+           }
+           if (document.queryCommandState('justifyLeft')) {
+               items.push('justifyLeft');
+           }
+           if (document.queryCommandState('justifyRight')) {
+               items.push('justifyRight');
+           }
+           if (document.queryCommandState('insertHorizontalRule')) {
+               items.push('horizontalRule');
+           }
+           var formatBlock = document.queryCommandValue('formatBlock');
+           if (formatBlock.length > 0) {
+               items.push(formatBlock);
+           }
+
+           window.location.href = "re-callback://" + encodeURI(RE.getHtml())+"york&&&&"+"re-state://" + encodeURI(items.join(','));
+
 }
 
 RE.setHtml = function(contents) {
